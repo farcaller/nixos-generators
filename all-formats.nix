@@ -33,7 +33,7 @@
   formats = lib.flip lib.mapAttrs allConfigs (
     formatName: conf: pkgs.runCommand "${conf.config.system.build.${conf.config.formatAttr}.name}${conf.config.fileExtension}" {} ''
       set -efu
-      target=$(find '${conf.config.system.build.${conf.config.formatAttr}}' -name '*${conf.config.fileExtension}' -xtype f -print -quit)
+      target=$(find '${conf.config.system.build.${conf.config.formatAttr}}' -wholename '*${conf.config.fileExtension}' -xtype f -print -quit)
       ln -s "$target" "$out"
     ''
   );
